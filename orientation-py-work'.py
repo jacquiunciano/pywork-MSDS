@@ -37,3 +37,66 @@ def function():
             return n
 print(function())
 ## sol3 = 6857
+
+## Histograms
+## Binomial
+import matplotlib.pyplot as plt
+import numpy as np
+bi = np.random.binomial(10,0.5,10000)
+plt.hist(bi)
+plt.show()
+## Poisson
+pois = np.random.poisson(1,10000)
+plt.hist(pois)
+plt.show()
+## Normal
+norm = np.random.normal(0,1,10000)
+plt.hist(norm)
+plt.show()
+## Uniform
+uni = np.random.uniform(0,1,10000)
+plt.hist(uni)
+plt.show()
+## Chi Square
+cs = np.random.chisquare(1,10000)
+plt.hist(cs)
+plt.show()
+
+## Testing Central N Theorm with Binomial and Normal Dist.
+import matplotlib.pyplot as plt
+import numpy as np
+bi1 = np.random.binomial(10,0.5,10)
+plt.subplot(3, 2, 1)
+plt.hist(bi1)
+bi2 = np.random.binomial(10,0.5,100)
+plt.subplot(3, 2, 2)
+plt.hist(bi2)
+bi3 = np.random.binomial(10,0.5,1000)
+plt.subplot(3, 2, 3)
+plt.hist(bi3)
+bi4 = np.random.binomial(10,0.5,10000)
+plt.subplot(3, 2, 4)
+plt.hist(bi4)
+bi5 = np.random.binomial(10,0.5,100000)
+plt.subplot(3, 2, 5)
+plt.hist(bi5)
+plt.show()
+
+import matplotlib.pyplot as plt
+import numpy as np
+norm1 = np.random.normal(0,1,10)
+plt.subplot(3, 2, 1)
+plt.hist(norm1)
+norm2 = np.random.normal(0,1,100)
+plt.subplot(3, 2, 2)
+plt.hist(norm2)
+norm3 = np.random.normal(0,1,1000)
+plt.subplot(3, 2, 3)
+plt.hist(norm3)
+norm4 = np.random.normal(0,1,10000)
+plt.subplot(3, 2, 4)
+plt.hist(norm4)
+norm5 = np.random.normal(0,1,100000)
+plt.subplot(3, 2, 5)
+plt.hist(norm5)
+plt.show()
