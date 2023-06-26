@@ -1,0 +1,66 @@
+---
+title: "GruopProject1"
+author: "Lingzhen"
+date: "2023-06-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Part 1
+First import the package and data
+```{r}
+library(ggplot2)
+library(tidyverse)
+Data<-read.csv("C:\\Users\\zhuli\\Desktop\\STAT6021\\Project1\\diamonds4.csv")
+```
+Then do the visualization
+```{r}
+ggplot(Data, aes(x=carat, y=price))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+Generally, the price goes up when the carat goes up.
+This graph dose not appears good, so I'm going to choose another way to do the regression.
+Model Diagnostics with Residual Plot
+```{r}
+result<-lm(price~carat, data=Data)
+par(mfrow = c(2, 2))
+plot(result)
+```
+```{r}
+library(MASS)
+MASS::boxcox(result, lambda = seq(0, 0.5, 1/100))
+```
+We can use log transform to see
+```{r}
+ystar<-log(Data$price)
+Data<-data.frame(Data,ystar)
+result.ystar<-lm(ystar~carat, data=Data)
+par(mfrow = c(2, 2))
+plot(result.ystar)
+```
+```{r}
+ggplot(Data, aes(x=carat, y=ystar))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+
+
+```{r}
+xstar<-log(Data$carat)
+Data<-data.frame(Data,xstar)
+result.xstar<-lm(ystar~xstar, data=Data)
+par(mfrow = c(2, 2))
+plot(result.xstar)
+```
+```{r}
+ggplot(Data, aes(x=xstar, y=ystar))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+
