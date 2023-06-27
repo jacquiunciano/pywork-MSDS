@@ -28,9 +28,10 @@ This report explores the relationship between the 4C of diamonds (cut, carat, co
 and clarity) and the price of the diamond with a focus on the carat. 
 
 ### Carat 
+### Carat 
 The carat refers to the *weight* of the diamond, not the *size* of the diamond. 
 **Blue Nile** asserts that when it comes to the quality of a diamond, the carat 
-is not a determining factor in this diamond's value. Meaning, the larger the carat 
+is not a determining factor in this diamond's quality. Meaning, the larger the carat 
 of the diamond does not mean that the diamond is higher in value. Larger diamonds 
 are sourced from larger crystals, meaning it's relatively harder to find than smaller 
 crystals. Therefore, the price of a large carat diamond depends on how rare the larger 
@@ -56,7 +57,11 @@ color, and cut of a diamond.
 ## Clarity
 For clarity, diamonds are grouped into 11 different clarity grades, ranging from low 
 (Included -I1,I2,I3- Diamonds) to high (Internally Flawless -IF- Diamonds) grade. In the 
-graph "Relationship Between The Carat Weight of Diamonds and the Price by Clarity", 
+graph "Relationship Between The Carat Weight of Diamonds and the Price by Clarity", it 
+is apparent that regardless of how high the clarity grade is, the lower carat diamonds
+(0-2 carat) are still within the $100K range for pricing. Please note that while
+**Blue Nile** does offer a limited selection of preset jewelry with I1 diamonds, there
+were no records of Included Diamonds within this data set.
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
@@ -69,6 +74,13 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
   xlab("Carat Weight")+
   ylab("Price (Thousands)")
 ```
+**insert relationship between clarity and color, clarity and cut**
+
+## Color
+The same relationship between the clarity and carat of a diamond in terms of pricing
+can be said about the relationship between the color and carat of a diamond. Refer to the
+graph "Relationship Between The Carat Weight of Diamonds and the Price by Color". 
+
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=color))+
   geom_point()+
