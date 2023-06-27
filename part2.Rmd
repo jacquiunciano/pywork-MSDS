@@ -1,0 +1,91 @@
+---
+title: "GruopProject1"
+author: "Lingzhen"
+date: "2023-06-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Part 2
+First import the package and data
+```{r}
+library(ggplot2)
+library(tidyverse)
+Data<-read.csv("C:\\Users\\zhuli\\Desktop\\STAT6021\\Project1\\diamonds4.csv")
+```
+Then, reorder the factor level
+```{r}
+Data<- Data%>%
+  mutate(color = color%>%
+           fct_relevel(c("J","I","H","G","F","E","D")))
+```
+I think we should also reorder the other factor level base on my team mate works.
+```{r}
+Data<- Data%>%
+  mutate(clarity = clarity%>%
+           fct_relevel(c("FL", "IF", "VVS1", "VVS2", "VS1", "VS2", "SI1", "SI2")))
+```
+```{r}
+Data<- Data%>%
+  mutate(cut = cut%>%
+           fct_relevel(c("Astor Ideal", "Ideal", "Very Good", "Good")))
+```
+
+Then do the visualization, first do the bivariate
+(1)color&price
+```{r}
+ggplot(Data, aes(x=color, y=price))+
+  geom_boxplot(fill="Blue")+
+  labs(title="Price of Different Color")
+```
+```{r}
+ystar<-log(Data$price)
+ggplot(Data, aes(x=color, y=ystar))+
+  geom_boxplot(fill="Blue")+
+  labs(y="log(price)", title="Price of Different Color")
+```
+(2)color&carat
+```{r}
+ggplot(Data, aes(x=color, y=carat))+
+  geom_boxplot(fill="Blue")+
+  labs(title="Carat of Different Color")
+```
+
+```{r}
+xstar<-log(Data$carat)
+ggplot(Data, aes(x=color, y=xstar))+
+  geom_boxplot(fill="Blue")+
+  labs(y="log(carat)", title="Carat of Different Color")
+```
+
+(3)	Clarity&color
+```{r}
+ggplot(Data, aes(x=color, fill=clarity))+
+  geom_bar(position = "fill")+
+  labs(y="proportion", title="Clarity by color")
+```
+(4)	Cut&color
+```{r}
+ggplot(Data, aes(x=color, fill=cut))+
+  geom_bar(position = "fill")+
+  labs(y="proportion", title="Cut by color")
+```
+Then do the Multivariate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
