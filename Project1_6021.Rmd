@@ -6,8 +6,124 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(results = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+```{r}
+library(ggplot2)
+library(dplyr)
+library(MASS)
+diamond = read.csv("C:\\Users\\jacqu\\Downloads\\diamonds4.csv", header=TRUE)
+diamond$clarity = factor(diamond$clarity, levels=c("I1","I2","I3","SI1","SI2","VS1","VS2","VVS1","VVS2","IF","FL"))
+levels(diamond$clarity)
 ```
 
 # Blue Nile Diamond Report
 ## Tatev Gomtsyan, Taryn Trimble, Jacqui Unciano, Lingzhen Zhu
+
+### Introduction
+This report explores the relationship between the 4C of diamonds (cut, carat, color, 
+and clarity) and the price of the diamond with a focus on the carat. 
+
+### Carat 
+The carat refers to the *weight* of the diamond, not the *size* of the diamond. 
+**Blue Nile** asserts that when it comes to the quality of a diamond, the carat 
+is not a determining factor in this diamond's value. Meaning, the larger the carat 
+of the diamond does not mean that the diamond is higher in value. Larger diamonds 
+are sourced from larger crystals, meaning it's relatively harder to find than smaller 
+crystals. Therefore, the price of a large carat diamond depends on how rare the larger 
+crystals are. This would suggest that the larger the carat is, the more expensive the 
+diamond is. Refer to the graph below titled "Relationship Between the Carat Weight of
+Diamonds and the Price". Generally, the price goes up when the carat goes up.
+```{r}
+ggplot(diamond, aes(x=carat, y=price/1000))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_bw()+
+  ggtitle("Relationship Between The Carat Weight of Diamonds and the Price")+
+  xlab("Carat Weight")+
+  ylab("Price (Thousands)")
+```
+However, quality differs from price. **Blue Nile** asserts that the carat is the most 
+influential factor in determining price, *not* quality. 
+
+Now, looking at the relationship between carat and the other 3Cs in terms of pricing, it 
+is noted that the carat of the diamond heavily influences the price despite the clarity, 
+color, and cut of a diamond. 
+
+## Clarity
+For clarity, diamonds are grouped into 11 different clarity grades, ranging from low 
+(Included -I1,I2,I3- Diamonds) to high (Internally Flawless -IF- Diamonds) grade. In the 
+graph "Relationship Between The Carat Weight of Diamonds and the Price by Clarity", 
+
+```{r}
+ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  facet_wrap(~clarity)+
+  theme_bw()+
+  ggtitle(label="Relationship Between The Carat Weight of Diamonds and the Price",
+          subtitle="by Clarity")+
+  xlab("Carat Weight")+
+  ylab("Price (Thousands)")
+```
+```{r}
+ggplot(diamond, aes(x=carat, y=price/1000, color=color))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  facet_wrap(~color)+
+  theme_bw()+
+  ggtitle(label="Relationship Between The Carat Weight of Diamonds and the Price",
+          subtitle="by Color")+
+  xlab("Carat Weight")+
+  ylab("Price (Thousands)")
+```
+```{r}
+ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  facet_wrap(~cut)+
+  theme_bw()+
+  ggtitle(label="Relationship Between The Carat Weight of Diamonds and the Price",
+          subtitle="by Cut")+
+  xlab("Carat Weight")+
+  ylab("Price (Thousands)")
+```
+
+
+
+### Regression for Carat
+```{r}
+result<-lm(price~carat, data=diamond)
+par(mfrow = c(2, 2))
+plot(result)
+```
+```{r}
+MASS::boxcox(result, lambda = seq(0, 0.5, 1/100))
+```
+```{r}
+ystar<-log(diamond$price)
+Data<-data.frame(diamond,ystar)
+result.ystar<-lm(ystar~carat, data=diamond)
+par(mfrow = c(2, 2))
+plot(result.ystar)
+```
+```{r}
+ggplot(diamond, aes(x=carat, y=ystar))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+```{r}
+xstar<-log(Data$carat)
+Data<-data.frame(Data,xstar)
+result.xstar<-lm(ystar~xstar, data=Data)
+par(mfrow = c(2, 2))
+plot(result.xstar)
+```
+```{r}
+ggplot(Data, aes(x=xstar, y=ystar))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
