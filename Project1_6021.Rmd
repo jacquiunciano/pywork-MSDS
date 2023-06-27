@@ -56,10 +56,12 @@ color, and cut of a diamond.
 
 ## Clarity
 For clarity, diamonds are grouped into 11 different clarity grades, ranging from low 
-(Included -I1,I2,I3- Diamonds) to high (Internally Flawless -IF- Diamonds) grade. In the 
+(Included -I1,I2,I3- Diamonds) to high (Flawless -FL- Diamonds) grade. In the 
 graph "Relationship Between The Carat Weight of Diamonds and the Price by Clarity", it 
 is apparent that regardless of how high the clarity grade is, the lower carat diamonds
-(0-2 carat) are still within the $100K range for pricing. Please note that while
+(0-2 carat) are still within the $100K range for pricing. Most of the different clarity 
+grades also seem to rise in price in a similar fashion as well; the exceptions being the 
+two Slightly Included grades and the Flawless grade. Please note that while
 **Blue Nile** does offer a limited selection of preset jewelry with I1 diamonds, there
 were no records of Included Diamonds within this data set.
 
@@ -78,8 +80,13 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
 
 ## Color
 The same relationship between the clarity and carat of a diamond in terms of pricing
-can be said about the relationship between the color and carat of a diamond. Refer to the
-graph "Relationship Between The Carat Weight of Diamonds and the Price by Color". 
+can be said about the relationship between the color and carat of a diamond. There are 
+8 color grades for diamonds, ranging frmo low (K) to high (D) grade that are offered at 
+**Blue Nile**. The other lower grades (L to Z) are not offered at **Blue Nile**. Refer to 
+the graph "Relationship Between The Carat Weight of Diamonds and the Price by Color". As 
+shown by the graph, regardless of the color of the diamond, the lower carat (0-2 carat) 
+diamonds stay within the $100K price range. It is noted that the price seems to rise faster 
+in higher color grade diamonds than lower color grade diamonds.
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=color))+
