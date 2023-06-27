@@ -99,6 +99,18 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=color))+
   xlab("Carat Weight")+
   ylab("Price (Thousands)")
 ```
+**insert relationship between color and cut**
+
+## Cut
+The relationship between the cut and carat of diamonds in terms of price is similar 
+to the relationship between the clarity and carat and the color and carat of diamonds.
+Refer to the graph titled "Relationship Between The Carat Weight of Diamonds and the Price
+by Cut". If the carat mattered less, there would be evidence of a higher starting price as 
+the cut grade increases, regardless of carat weight. However, similar to the other trends,
+the price of the diamonds have the same starting range based on carat weight, regardless 
+of the quality grades for clarity, color, and cut. In addition, the prices seem to rise
+in a similar fashion, regardless of cut grade. 
+
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
   geom_point()+
@@ -111,17 +123,25 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
   ylab("Price (Thousands)")
 ```
 
-
-
 ### Regression for Carat
+Due to the heavy influence that the carat weight has on the price of the diamond, a 
+simple linear regression analysis was done for the variable carat weight. However, 
+as seen in the residual plots titled "Residual Plots for Price of Diamonds Against 
+Carat Weight", the variance increases as the price (fitted values) increases and 
+the regression line seems to overestimate the price, especially towards the higher 
+prices.
+
 ```{r}
 result<-lm(price~carat, data=diamond)
 par(mfrow = c(2, 2))
 plot(result)
+mtext("Residual Plots for Price of Diamonds Against Carat Weight", side = 3, line = -1.5, outer = TRUE)
 ```
+
 ```{r}
 MASS::boxcox(result, lambda = seq(0, 0.5, 1/100))
 ```
+
 ```{r}
 ystar<-log(diamond$price)
 Data<-data.frame(diamond,ystar)
@@ -129,11 +149,13 @@ result.ystar<-lm(ystar~carat, data=diamond)
 par(mfrow = c(2, 2))
 plot(result.ystar)
 ```
+
 ```{r}
 ggplot(diamond, aes(x=carat, y=ystar))+
   geom_point()+
   geom_smooth(method = "lm", se = FALSE)
 ```
+
 ```{r}
 xstar<-log(Data$carat)
 Data<-data.frame(Data,xstar)
@@ -141,6 +163,7 @@ result.xstar<-lm(ystar~xstar, data=Data)
 par(mfrow = c(2, 2))
 plot(result.xstar)
 ```
+
 ```{r}
 ggplot(Data, aes(x=xstar, y=ystar))+
   geom_point()+
