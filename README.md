@@ -19,4 +19,5 @@ This is the work done to analyse the cut, color, clarity, and carat weight for d
 2. part1.Rmd, done by Lingzhen Zhu
 3. part2.Rmd, done by Lingzhen Zhu
 4. Taryn_ProjWork, done by Tatev Gomtsyan
+
 The final draft for the report is the file named Project1_6021.Rmd; file was created, formatted, and contributed by Jacqui Unciano.
