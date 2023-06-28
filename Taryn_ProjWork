@@ -1,0 +1,64 @@
+---
+title: "Trimble_Project1"
+author: "Taryn Trimble"
+date: "2023-06-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(tidyr)
+```
+
+
+```{r}
+diamonds<-read.csv('diamonds4.csv', header = TRUE)
+head(diamonds, 10)
+```
+
+```{r}
+diamonds_price<-diamonds %>% 
+  group_by(clarity) %>% 
+  summarize(average_price = mean(price)) %>% 
+  arrange(clarity)
+  head(diamonds_price,8)
+  
+diamonds<-diamonds %>%
+  inner_join(diamonds_price, by = c('clarity'='clarity'))
+  head(diamonds, 10)
+```
+
+
+```{r}
+
+diamonds$clarity=factor(diamonds$clarity, levels = c('SI1','SI2', 'VS1', 'VS2', 'VVS1', 'VVS2','IF', 'FL'))
+ 
+diamonds_clarity<-diamonds %>% 
+  group_by(clarity)
+```
+###############################################################################################
+
+#Graph 1:
+```{r}
+ggplot(data = diamonds_clarity) + aes(y = price, x=clarity, color=clarity, size=carat)+ geom_point(alpha=0.4)+ggtitle('Price of Diamonds by Clarity') + xlab('Level of Clarity') + ylab('Price')
+```
+The graph above displays the relationship between the price and clarity of diamonds. The graph is organized by lowest level of clarity on the left to the highest level of clarity on the right. The carat of each diamond was added due to the heavy influence of carat on price. It also displayed how a diamond of a smaller carat but higher clarity can be more expensive then a larger carat diamond but with lower clarity. According to level of clarity Blue Nile has fewer diamonds in the SI1 and SI2 levels, this is due to their claim of retaining a high standard for their customers.
+
+#Graph 2: 
+```{r}
+ggplot(data = diamonds_clarity) + aes(y = carat, x=clarity, size=price, color= clarity)+ geom_point(alpha=0.3) + ggtitle('Clarity of each Diamond Carat') + xlab('Level Clarity') + ylab('Carat')
+```
+The graph above visualizes the relationship between the carat and level of clarity of each diamond. This is somewhat similar to the previous graph according to the variables used in each visualization, but the purpose of each is different. This graph shows more of the relationship between carat and level of clarity, with price as additional information. It shows a clear image of price increase when both the carat and the clarity increase. Although there are some slight outliers, which is likely due to the other variables given by Blue Nile.
+
+#Graph 3:
+```{r}
+ggplot(diamonds, aes(x=clarity, fill= cut))+
+geom_bar(position='fill')+
+theme(axis.text.x = element_text(angle = 90),
+plot.title = element_text(hjust = 0.5))+
+labs(x="Level of Clarity", y="Proportion of Cuts", title="Clarity of each Diamond Cut")
+```
+The bar chart above displays the relationship between the type of cuts and the levels of clarity. This shows that most of the cuts are ideal regardless of each level of clarity. But for the highest two levels of clarity, there appears to be no diamonds with the Astor ideal cut. This is likely due to the rarity of the IF and FL level diamonds. Within the 1214 diamonds we were given data for 49 were IF clarity and 3 were FL clarity. Regardless of the diamonds not having and Astor ideal cuts, they still make up the most expensive diamonds in the data set. 
