@@ -18,7 +18,8 @@ library(dplyr)
 library(MASS)
 diamond = read.csv("C:\\Users\\jacqu\\Downloads\\diamonds4.csv", header=TRUE)
 diamond$clarity = factor(diamond$clarity, levels=c("I1","I2","I3","SI1","SI2","VS1","VS2","VVS1","VVS2","IF","FL"))
-levels(diamond$clarity)
+diamond$color = factor(diamond$color, levels=c("D", "E", "F", "G", "H", "I", "J", "K"))
+diamond$cut = factor(diamond$cut, levels=c("Good", "Very Good", "Ideal", "Astor Ideal"))
 ```
 
 # Section 1: Analysis Report
@@ -214,7 +215,12 @@ ggplot(diamond, aes(x=color, y=log(price/1000)))+
 Refer to the graph labelled Figure 6. Very Good and Ideal cuts seem to have a more 
 curvilinear trend. But, similar to the overall conclusion drawn with the clarity 
 and color variables, the difference might not be statistically significant. More 
-testing needs to be done.
+testing needs to be done. In addition, As carat increases, price also increases 
+for all diamond cut types. By observation, Good cut has the steepest slope. The 
+highest prices belong to Very Good and Ideal cuts. According to the data set, Astor 
+Ideal cuts usually have smaller carats and lower price, but **Blue Nile** has stated 
+that their super-ideal Astor is the most expensive cut, which contradicts the 
+observation. 
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
@@ -227,6 +233,47 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
        x="Carat Weight",
        y="Price in Thousands (USD)",
        caption="Figure 6")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
+```
+
+Figure 7 also contradicts the statement that **Blue Nile** stated about the Astor 
+Ideal diamonds. Figure 7 shows the summary statistics for the log-price to create 
+a more visually effective boxplot. Judging by the figure, we can see that the IQR 
+of prices of all cut types is about 7-9. Astor Ideal has the highest median out of 
+the cut types, but the difference may or may not be negligible. Good and Very Good 
+cuts have almost identical medians, but the Very Good cut has a larger range of prices 
+and a much higher maximum price. Surprisingly, Ideal cuts have the biggest IQR and 
+the first quartile of this box has the lowest starting point. 
+
+```{r}
+log_price<- log(diamond$price) #restores symmetry to data and reduces skewness
+ggplot(diamond, aes(x=cut, y=log_price)) +
+  geom_boxplot(fill="pink")+
+  labs(x="Cut Type", y="Log-Price", title="Boxplot Representing Price vs Cut of Blue Nile Diamonds",
+       caption="Figure 7")+
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust = 0, size=10, face="bold")) #centering title
+```
+
+The relationship between cut and color was observed using a stacked bar graph (see:
+Figure 8). The highest quality color is considered 'D', and the lowest, 'J'. Overall, 
+there doesn't seem to be too much difference in the colors of each cut. However, we 
+can make the observation that Good cut has the largest proportion of D color, while 
+Astor Ideal has the largest proportion of F color. When thinking about the price points of 
+these cuts and the quality of colors, we know that Astor Ideal doesn't have a high 
+price point, which is in line with the color quality. On the other hand, we know that 
+Very Good and Ideal cuts have the highest prices, but this is not reflected in the 
+colors that are used for these cuts. All colors seem to be used pretty evenly for 
+both cuts, with no overwhelming use of any color to create an association with price. 
+
+```{r}
+ggplot(diamond, aes(x=cut, fill=color))+
+  geom_bar(position="fill")+
+  theme_bw()+
+  labs(y="Proportion",
+       x="Cut",
+       title="Cut by Color",
+       caption="Figure 8")+
   theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
 
