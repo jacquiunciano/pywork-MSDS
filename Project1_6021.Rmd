@@ -1,6 +1,6 @@
 ---
-title: "Project1_6021"
-author: "Jacqui Unciano"
+title: "Blue Nile Diamond Report"
+author: "Tatev Gomtsyan, Taryn Trimble, Jacqui Unciano, Lingzhen Zhu"
 date: "2023-06-26"
 output: pdf_document
 ---
@@ -11,6 +11,7 @@ knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(results = FALSE)
 knitr::opts_chunk$set(warning = FALSE)
 ```
+
 ```{r}
 library(ggplot2)
 library(dplyr)
@@ -20,50 +21,121 @@ diamond$clarity = factor(diamond$clarity, levels=c("I1","I2","I3","SI1","SI2","V
 levels(diamond$clarity)
 ```
 
-# Blue Nile Diamond Report
-## Tatev Gomtsyan, Taryn Trimble, Jacqui Unciano, Lingzhen Zhu
-
-### Introduction
+# Section 1: Analysis Report
+## Introduction
 This report explores the relationship between the 4C of diamonds (cut, carat, color, 
-and clarity) and the price of the diamond with a focus on the carat. 
+and clarity) and the price of the diamond with a focus on the carat weight. The 
+data set is provided by the certified diamond retailer company, **Blue Diamond**. 
+Their diamonds are analysed and graded by the Gemological Institute of America (GIA) 
+which is one of the most reputable diamond labs.
 
-### Carat 
-### Carat 
+## Findings Between the 4Cs and Price 
+After analysing the relationship between the 4Cs and the price of the diamonds, 
+there is strong evidence that the carat weight is the largest influencer in determining 
+the price of a diamond. The other three factors will need more in depth analysis in 
+order to determine their statistical significance as slight differences between the 
+cut, clarity, and color grade and the price were noted. **Blue  Nile** has explained 
+that while the quality of a diamond is determined by a balance of the carat weight, 
+clarity grade, color grade, and cut grade, the price can mostly be influenced by 
+the carat weight due to media and adverts. 
+
+However, they have also stated that the cut can be the biggest factor in the price 
+of a diamond, rather than the carat weight. While the data set provided by **Blue Nile** 
+definitely has some very high quality cuts of diamonds with a more expensive price 
+tag, it is noted that for the most part, the price does not visually seem to be too 
+different between the different grades of diamond cuts, suggesting more in-depth 
+analysis should be done. 
+
+In terms of the color and clarity of a diamond, **Blue Nile** has stated that while 
+these variables can influence the price of a diamond, there are other factors that 
+affect the appearance of the variables. For example, the metal used for a setting 
+can impact the appearance of the color. The size and shape of the diamond can mask 
+the inclusions or make the inclusions more visible. This is mostly supported by the 
+data set as it's apparent that for most of the clarity grades, the price range is 
+not too different for most of the diamonds recorded. It is noted that there is still 
+a slight difference between groups of grades. The same can be said for the difference 
+between prices in terms of color grade. Visually, there seems to be an 
+insignificant difference, but it's recommended to analyse these two variables more.
+
+These observations about the relationship between the 4Cs and price is supported by our 
+analysis. Information about the data set and how each visualization was made, along 
+with thet appropiate in-depth analysis can be found in section 2 of this report.
+
+# Section 2: Data Description and Visualization 
+## About: Carat
 The carat refers to the *weight* of the diamond, not the *size* of the diamond. 
-**Blue Nile** asserts that when it comes to the quality of a diamond, the carat 
-is not a determining factor in this diamond's quality. Meaning, the larger the carat 
-of the diamond does not mean that the diamond is higher in value. Larger diamonds 
-are sourced from larger crystals, meaning it's relatively harder to find than smaller 
-crystals. Therefore, the price of a large carat diamond depends on how rare the larger 
-crystals are. This would suggest that the larger the carat is, the more expensive the 
-diamond is. Refer to the graph below titled "Relationship Between the Carat Weight of
-Diamonds and the Price". Generally, the price goes up when the carat goes up.
+Larger diamonds are sourced from larger crystals, meaning it's relatively harder 
+to find than smaller crystals. Therefore, the price of a large carat diamond depends 
+on how rare the larger crystals are. This would suggest that the larger the carat is, 
+the more expensive the diamond is. In our data set, the variable name is *carat*.
+
+## About: Clarity 
+For clarity, diamonds are grouped into 11 different clarity grades, ranging from 
+low (Included -I1,I2,I3- Diamonds) to high (Flawless -FL- Diamonds) grade. Clarity 
+refers to how many 'inclusions' are within a diamond as the more inclusions a diamond 
+has, the more negatively it affects the beauty of the diamond. In our data set, the 
+variable name is *clarity*.
+
+## About: Colour 
+Color refers to how colourless a diamond is. There are 8 color grades for diamonds, 
+ranging from low (K) to high (D) grade that are offered at **Blue Nile**. The other 
+lower grades (L to Z) are not offered at **Blue Nile**. Diamonds with higher ratings 
+strive to be as colorless as possible, whereas diamonds with lower ratings tend to 
+exhibit more noticeable hues as we progress along the color diamond scale chart. 
+A colorless diamond appears transparent, while diamonds lower on the rating chart 
+may exhibit a warm tint or hue. In our data set, the variable name is *color*.
+
+## About: Cut 
+The cut of a diamond refers to the light performance of a diamond. It is based on 
+a combination of factors: proportions, symmetry, and polish (the overall surface 
+condition of facets). There are four grades to the GIA scale for cut, ranging from 
+"Poor/Fair" to "Excellent/Ideal". **Blue Nile** has their specialty "Super Ideal" 
+ranking called *Astor*. **Blue Nile** does not sell poor/fair diamonds. In our data 
+set, the variable name is *cut*.
+
+## About: Price
+The price is the dollar amount of each diamond in USD. For the most part of the 
+visualizations, the price will either be reflected in thousands or log-thousands 
+for easier comprehension/visualization. In our data set, the variable name is *price*. 
+
+## Additional Information on Dataset Changes 
+The analysis on the relationship between the predictor variables and response variables 
+were done using R. The packages used were ggplot2, dplyr, and MASS for data wrangling 
+and visualization. 
+
+Due to the variables Clarity, Color, and Cut having a grade order, the variables 
+were refactored using the factor() function in order to reflect the grades from 
+lowest to highest when creating the graphs and visualizations.
+
+## Graphs and Visualizations
+Refer to Figure 1. Generally, the price goes up when the carat goes up. The relationship 
+between the carat weight and the price seem to follow a curvilinear trend, which 
+suggests a transformation for the carat variable. The variance also seems to be 
+increasing, suggesting a transformation for the price variable. This will be further 
+discussed in section 3.
+
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000))+
   geom_point()+
   geom_smooth(method = "lm", se = FALSE)+
   theme_bw()+
-  ggtitle("Relationship Between The Carat Weight of Diamonds and the Price")+
-  xlab("Carat Weight")+
-  ylab("Price (Thousands)")
+  labs(title="Relationship Between The Carat Weight of Diamonds and the Price",
+        x="Carat Weight",
+        y="Price in Thousands (USD)",
+        caption="Figure 1")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
-However, quality differs from price. **Blue Nile** asserts that the carat is the most 
-influential factor in determining price, *not* quality. 
 
-Now, looking at the relationship between carat and the other 3Cs in terms of pricing, it 
-is noted that the carat of the diamond heavily influences the price despite the clarity, 
-color, and cut of a diamond. 
+In the graph labelled Figure 2, there appears to be a small difference in the prices 
+of a diamond in terms of clarity. It is currently unknown if the difference is statistically 
+significant. Most of the different clarity grades also seem to rise in price in a 
+similar fashion as well since most of them seem to have a curvilinear relationship 
+with price. The two Slightly Included grades and the Flawless grade are noted to 
+be seemingly more different to the other 5 categories. 
 
-## Clarity
-For clarity, diamonds are grouped into 11 different clarity grades, ranging from low 
-(Included -I1,I2,I3- Diamonds) to high (Flawless -FL- Diamonds) grade. In the 
-graph "Relationship Between The Carat Weight of Diamonds and the Price by Clarity", it 
-is apparent that regardless of how high the clarity grade is, the lower carat diamonds
-(0-2 carat) are still within the $100K range for pricing. Most of the different clarity 
-grades also seem to rise in price in a similar fashion as well; the exceptions being the 
-two Slightly Included grades and the Flawless grade. Please note that while
-**Blue Nile** does offer a limited selection of preset jewelry with I1 diamonds, there
-were no records of Included Diamonds within this data set.
+Please note that while **Blue Nile** does offer a limited selection of preset 
+jewelry with I1 diamonds, there were no records of Included Diamonds within this 
+data set.
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
@@ -71,22 +143,22 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
   geom_smooth(method = "lm", se = FALSE)+
   facet_wrap(~clarity)+
   theme_bw()+
-  ggtitle(label="Relationship Between The Carat Weight of Diamonds and the Price",
-          subtitle="by Clarity")+
-  xlab("Carat Weight")+
-  ylab("Price (Thousands)")
+  labs(title="Relationship Between The Carat Weight of Diamonds and the Price",
+       subtitle="by Clarity",
+       x="Carat Weight",
+       y="Price in Thousands (USD)",
+       caption="Figure 2")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
+
 **insert relationship between clarity and color, clarity and cut**
 
-## Color
-The same relationship between the clarity and carat of a diamond in terms of pricing
-can be said about the relationship between the color and carat of a diamond. There are 
-8 color grades for diamonds, ranging frmo low (K) to high (D) grade that are offered at 
-**Blue Nile**. The other lower grades (L to Z) are not offered at **Blue Nile**. Refer to 
-the graph "Relationship Between The Carat Weight of Diamonds and the Price by Color". As 
-shown by the graph, regardless of the color of the diamond, the lower carat (0-2 carat) 
-diamonds stay within the $100K price range. It is noted that the price seems to rise faster 
-in higher color grade diamonds than lower color grade diamonds.
+Refer to the graph labelled Figure 3. As shown by the graph, there seems to be a 
+faster rise in price as color grade increases, but the difference may or may not be 
+statistically significant. It also seems to be that as color grade increases in 
+quality, the curvilinear trend becomes more prominent. 
+
+Note that we do not have all the type of color in our data set. 
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=color))+
@@ -94,22 +166,55 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=color))+
   geom_smooth(method = "lm", se = FALSE)+
   facet_wrap(~color)+
   theme_bw()+
-  ggtitle(label="Relationship Between The Carat Weight of Diamonds and the Price",
-          subtitle="by Color")+
-  xlab("Carat Weight")+
-  ylab("Price (Thousands)")
+  labs(title="Relationship Between The Carat Weight of Diamonds and the Price",
+       subtitle="by Color",
+       x="Carat Weight",
+       y="Price in Thousands (USD)",
+       caption="Figure 3")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
-**insert relationship between color and cut**
 
-## Cut
-The relationship between the cut and carat of diamonds in terms of price is similar 
-to the relationship between the clarity and carat and the color and carat of diamonds.
-Refer to the graph titled "Relationship Between The Carat Weight of Diamonds and the Price
-by Cut". If the carat mattered less, there would be evidence of a higher starting price as 
-the cut grade increases, regardless of carat weight. However, similar to the other trends,
-the price of the diamonds have the same starting range based on carat weight, regardless 
-of the quality grades for clarity, color, and cut. In addition, the prices seem to rise
-in a similar fashion, regardless of cut grade. 
+Refer to the boxplot labeled Figure 4.
+
+An initial side-by-side boxplot of Price against Color is hard to read, as shown 
+below in Figure 4. No additional changes were made to the data other than transforming 
+the price variable into thousands by dividing by 1000.
+
+```{r}
+ggplot(diamond, aes(x=color, y=price/1000))+
+  geom_boxplot(fill="lightblue")+
+  theme_bw()+
+  labs(title="Price of Diamonds by Color Grade",
+       x="Color Grade",
+       y="Price in Thousands (USD)",
+       caption="Figure 4")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
+```
+
+As seen, it is hard to see the result as there are so many expensive diamonds and 
+there are more data points collected on the less expensive diamonds. A log transformation 
+was done on the price variable for a better view (see Figure 5) by taking the log 
+of the price variable.
+
+The resulting graph, Figure 5, suggests that the color of the diamond does not 
+significantly affect the price as the median seems to stay relatively constant 
+throughout the different color grades.
+
+```{r}
+ggplot(diamond, aes(x=color, y=log(price/1000)))+
+  geom_boxplot(fill="lightblue")+
+  theme_bw()+
+  labs(title="Log-Price of Diamonds by Color Grade",
+       x="Color Grade",
+       y="Log-Price in Thousands (USD)",
+       caption="Figure 5")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
+```
+
+Refer to the graph labelled Figure 6. Very Good and Ideal cuts seem to have a more 
+curvilinear trend. But, similar to the overall conclusion drawn with the clarity 
+and color variables, the difference might not be statistically significant. More 
+testing needs to be done.
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
@@ -117,30 +222,40 @@ ggplot(diamond, aes(x=carat, y=price/1000, color=cut))+
   geom_smooth(method = "lm", se = FALSE)+
   facet_wrap(~cut)+
   theme_bw()+
-  ggtitle(label="Relationship Between The Carat Weight of Diamonds and the Price",
-          subtitle="by Cut")+
-  xlab("Carat Weight")+
-  ylab("Price (Thousands)")
+  labs(title="Relationship Between The Carat Weight of Diamonds and the Price",
+       subtitle="by Cut",
+       x="Carat Weight",
+       y="Price in Thousands (USD)",
+       caption="Figure 6")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
 
-### Regression for Carat
-Due to the heavy influence that the carat weight has on the price of the diamond, a 
-simple linear regression analysis was done for the variable carat weight. However, 
-as seen in the residual plots titled "Residual Plots for Price of Diamonds Against 
-Carat Weight", the variance increases as the price (fitted values) increases and 
-the regression line seems to overestimate the price, especially towards the higher 
-prices.
+# Section 3: Simple Linear Regression for Price Against Carat Weight 
+A simple linear regression analysis was done for the variable carat weight. However, 
+as mentioned before and seen in the residual plots (see: Figure 7), the variance 
+increases as the price (fitted values) increases and the regression line seems to 
+either under- or over-estimate the price. This indicates that a transformation on 
+the response variable (price) and possibly the predictor variable (carat) may be 
+needed in order to successfully create a linear regression model.
 
 ```{r}
 result<-lm(price~carat, data=diamond)
 par(mfrow = c(2, 2))
 plot(result)
-mtext("Residual Plots for Price of Diamonds Against Carat Weight", side = 3, line = -1.5, outer = TRUE)
+mtext("Figure 7", side = 3, line = -1.5, outer = TRUE)
 ```
+
+The boxcox function from the R package MASS was used to determine an appropriate 
+transformation for the response variable (see: Figure 8).
 
 ```{r}
 MASS::boxcox(result, lambda = seq(0, 0.5, 1/100))
+mtext("Figure 8", side = 3, line = -3.5, outer = TRUE)
 ```
+
+Based on the results, a log transformation was done on the response variable and 
+the residual plots were redrawn (see: Figure 9). Figure 9 shows that the variance 
+has stablized. 
 
 ```{r}
 ystar<-log(diamond$price)
@@ -148,13 +263,28 @@ Data<-data.frame(diamond,ystar)
 result.ystar<-lm(ystar~carat, data=diamond)
 par(mfrow = c(2, 2))
 plot(result.ystar)
+mtext("Figure 9", side = 3, line = -1.5, outer = TRUE)
 ```
+
+However, the scatter plot for the log-price against carat weight still shows 
+a curvilinear trend, indicating that a tranformation of the predictor variable 
+is still needed. Based on the trend, a log transformation on the predictor 
+variable was done.
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=ystar))+
   geom_point()+
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_bw()+
+  labs(title="Relationship Between The Carat Weight of Diamonds and the Log-Price",
+        x="Carat Weight",
+        y="Log-Price in Thousands (USD)",
+        caption="Figure 10")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
+
+Figure 11 ascertains that the assumptions for simple linear regression hold. The0
+data points are evenly distributed over the regression line, meaning the 
 
 ```{r}
 xstar<-log(Data$carat)
@@ -162,10 +292,21 @@ Data<-data.frame(Data,xstar)
 result.xstar<-lm(ystar~xstar, data=Data)
 par(mfrow = c(2, 2))
 plot(result.xstar)
+mtext("Figure 11", side = 3, line = -1.5, outer = TRUE)
 ```
 
 ```{r}
 ggplot(Data, aes(x=xstar, y=ystar))+
   geom_point()+
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_bw()+
+    labs(title="Relationship Between The Log-Carat Weight of Diamonds and the Log-Price",
+        x="Log-Carat Weight",
+        y="Log-Price in Thousands (USD)",
+        caption="Figure 12")+
+  theme(plot.caption = element_text(hjust = 0, size=10, face="bold"))
 ```
+
+
+
+
