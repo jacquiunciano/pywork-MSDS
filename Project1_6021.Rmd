@@ -144,10 +144,8 @@ ggplot(data = diamond) +
         plot.title = element_text(hjust = 0.5))
 ```
 
-Figure 2.1 above more clearly displays the relationship between the log-price and clarity 
-of diamonds. Observing the median further supports that the grade of clarity does 
-not significantly change the price of the diamonds. Exceptions are noted for SI2 
-and FL clarity grade diamonds.
+Figure 2.1 above clearly displays the relationship between the log-price and clarity of diamonds. Observing the median supports that the grade of clarity does 
+not significantly change the price of the diamonds. But it is important to remember that the sample size of both IF and FL is much smaller than the other clarity categories. So it appears there is no relationship between the two but there is some slight uncertainty. 
 
 ```{r}
 ggplot(diamond, aes(x=carat, y=price/1000, color=clarity))+
@@ -192,9 +190,7 @@ ggplot(data = diamond) +
         plot.title = element_text(hjust = 0.5))
 ```
 
-Figure 2.3 shows a clearer image of price increase when both the carat and the clarity 
-increase. Although there are some slight outliers, which is likely due to the other 
-variables given by **Blue Nile**.
+Figure 2.3 shows a clearer image of price increase when both the carat and the clarity increase. Although there are some slight outliers, which is likely due to the other variables given by **Blue Nile**. The graph also gives a clearer image of how few data points there are in the IF and FL clarity levels.  
 
 Please note that while **Blue Nile** does offer a limited selection of preset 
 jewelry with I1 diamonds, there were no records of Included Diamonds within this 
@@ -215,13 +211,14 @@ ggplot(diamond, aes(x=clarity, fill= cut))+
 
 Figure 2.4 above displays the relationship between the type of cuts and the levels 
 of clarity. This shows that most of the cuts are ideal regardless of each level 
-of clarity, meaning that there may not be a relationship between these two variables.
+of clarity.
 
 It is observed that for the highest two levels of clarity, there appears to be no 
 diamonds with the Astor ideal cut. This is likely due to the rarity of the IF and 
 FL level diamonds. Within the 1214 diamonds we were given data for, 49 were IF 
-clarity and 3 were FL clarity. Regardless of the diamonds not having and Astor 
-ideal cuts, they still make up the most expensive diamonds in the data set. 
+clarity and 3 were FL clarity. Regardless of the diamonds not having any Astor 
+Ideal cuts, they still make up the most expensive diamonds in the data set. 
+
 
 ```{r}
 ggplot(diamond, aes(x=color2, y=log(price/1000), fill=color2))+
