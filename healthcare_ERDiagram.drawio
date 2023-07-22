@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-07-22T22:20:44.341Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="Kc0bZiW7d0FBYX9F1NFZ" version="21.6.5" type="github">
+<mxfile host="app.diagrams.net" modified="2023-07-22T22:21:37.803Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="9wH7qjhh_BOse7NbHLcM" version="21.6.5" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="862" dy="481" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1712" dy="481" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -267,7 +267,7 @@
           <mxGeometry x="315" y="130" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="58cPk2rYp0zfNqmspbuc-156" value="A patient goes to one hospital" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="90" y="110" width="160" height="30" as="geometry" />
+          <mxGeometry x="75" y="110" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="58cPk2rYp0zfNqmspbuc-189" value="physicians" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="480" y="320" width="80" height="40" as="geometry" />
@@ -337,6 +337,12 @@
         </mxCell>
         <mxCell id="58cPk2rYp0zfNqmspbuc-204" value="hospitals" style="shape=associativeEntity;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="310" y="440" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="58cPk2rYp0zfNqmspbuc-205" value="&lt;b&gt;ER Logical Diagram:&lt;br&gt;Chen Notation&lt;br&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="210" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="58cPk2rYp0zfNqmspbuc-206" value="&lt;b&gt;ER Conceptual Diagram:&lt;br&gt;IE Notation&lt;br&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="560" width="160" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
